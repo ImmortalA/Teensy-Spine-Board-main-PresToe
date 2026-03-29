@@ -1,9 +1,5 @@
 ## Teensy-Spine-Board
 
-<p align="center">
-  <img src="setup.jpeg" alt="Setup: actuators on a bench with control board and wiring" width="800"/>
-</p>
-
 Teensy 4.1 bridges **Ethernet UDP** and **T-Motor AK** drives in **MIT mode** on **11-bit CAN** at 1 Mbit/s. The PC app **`test_spine`** sends packed MIT frames; the Teensy unpacks them, transmits on CAN, and returns feedback over UDP.
 
 **Behavior (firmware):** After each valid host command, the Teensy **waits for feedback from every motor counted in `NUM_DAISY_MOTORS`** before accepting the next UDP packet. While waiting, it **re-sends the same MIT command** on CAN at a minimum interval (`MIT_RESEND_MIN_US`) so drives see a steady command stream. **Serial** (115200) can print timing statistics.
